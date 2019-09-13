@@ -39,6 +39,21 @@ light = pi3d.Light(lightpos=(1.0, 0.0, 0.1))
 mysphere = pi3d.Sphere(radius=0.10, slices=24, sides=24,
                   name="earth" , z=5.8)
 
+myrastros = pi3d.Sphere(radius=0.02, slices=24, sides=24,
+                  name="rastros" , z=5.8)
+
+myrastros.position(0,0,5.8)
+
+
+rastros = []
+for c in range(100):
+    myclone = pi3d.Sphere(radius=0.02, slices=24, sides=24,
+                  name="rastros" , z=5.8)
+    myclone.position(0,0,5.8)
+    rastros.append(myclone)
+
+contrastros = 0
+
 #myPoint = pi3d.Points(material=(1.0, 1.0, 1.0),
 #                      point_size=1, name="point",x=0.5, y=0.5, z=0.5)
 
@@ -57,17 +72,27 @@ while DISPLAY.loop_running():
   
   dist2 = round(calculate_distance(get_pulse_time()),2)
   
+  if abs(dist2 - dist) >= 0.02 and dist2 < 4:  # tolerancia
+    norm_dist = (1 - dist2)/(1 - 0.02)
+    # if dist2 > dist:
+    y = norm_dist * 10
+    dist = dist2
+    
+  
   print("DIST1:  " + str(dist) + " DIST2:  " + str(dist2))
   
-  if dist2 == dist or abs(dist2-dist) <= 0.0:
-    y = y # para fins didaticos
-  elif(dist2 > dist):
-    y = y + 0.10
-  else:
-    y = y - 0.10
-    
-  dist = round(calculate_distance(get_pulse_time()),2)
+  
   mysphere.position(y,0,5.8)
+
+  if contrastros >= 100:
+      contrastros = 0
+      
+  rastros[contrastros].position(y,0,5.8)
+  contrastros = contrastros + 1
+  
+  
+  for c in range(100):
+    rastros[c].draw()
   
   mysphere.draw()
   
@@ -85,3 +110,4 @@ while DISPLAY.loop_running():
 
     
     
+
