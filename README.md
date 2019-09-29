@@ -14,7 +14,7 @@ sudo vi /etc/rc.local
 ```
 & adicione a chamada ao código ao fim do arquivo rc.local
 ```
-sh /root/start_bengala.sh &
+sh /root/start_bengala.sh
 ```
 
 
