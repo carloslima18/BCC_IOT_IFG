@@ -4,7 +4,7 @@ Repositório para códigos desenvolvidos na aula de IOT do IFG Anápolis - Bacha
 
 ## Getting Started
 
-Para executar tarefas permanentemente, adicione a chamada a função em um sh dentro de um laço de repetição com condição sempre verdadeira:  https://github.com/Tadayuki123/BCC_IOT_IFG/blob/master/start_bengala.sh
+Para executar tarefas permanentemente, adicione a chamada a função em um sh dentro de um laço de repetição com condição sempre verdadeira:  https://github.com/Tadayuki123/BCC_IOT_IFG/blob/master/start_command.sh
 
 E para chamar a função na inicialização do sistema:
 
