@@ -27,8 +27,19 @@ tol = 5
 while True:
     angle = getGrau()
     if angulo_inicial - tol <= angle <= angulo_inicial + tol:
+        #Se o ângulo inicial for 350 e a tolerancia for de 15, então o limite é de 335 a 360, e 0 a 5, 
+        #porque ao completar a volta o ângulo passa de 360 para 0 -> elif abaixo
         print("VIVINHO")
         motor.value = 0.001
+    elif angulo_inicial + tol > 360 or angulo_inicial - tol < 0:
+        if angulo_inicial + tol > 360:
+            if angle + 360 > angulo_inicial + tol:
+                motor.value = 0.9
+                print("ATROPELADINHO")
+        elif angulo_inicial - tol < 0:
+            if angle - 360 < angulo_inicial - tol:
+                motor.value = 0.9
+                print("ATROPELADINHO")
     else:
         motor.value = 0.9
         print("ATROPELADINHO")
