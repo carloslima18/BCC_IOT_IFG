@@ -1,5 +1,7 @@
 from bussola import CommandsBussola
 from threading import Thread
+from gpiozero import PWMOutputDevice
+import time
 
 
 class Helps(object):
@@ -16,6 +18,7 @@ class Helps(object):
 
         while not self.stopped:
             angle = commands.getAngle()
+            print(angle)
             if anguloInicial - self.tolerancia <= angle <= anguloInicial + self.tolerancia:
                 self.motor.value = 0.001
             elif anguloInicial + self.tolerancia > 360 or anguloInicial - self.tolerancia < 0:
