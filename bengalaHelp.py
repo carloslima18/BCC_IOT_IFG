@@ -18,9 +18,10 @@ class Helps(object):
 
         torelanciaAnterior = self.tolerancia
         vibracao = 0
-        variacaoVibracao = 0.199
+        numVariacoes = 5
+        variacaoVibracao = 1/numVariacoes - 0.01
         variacaoTolerancia = 10
-        for i in range(5):
+        for i in range(numVariacoes):
             if anguloInicial - self.tolerancia <= angle <= anguloInicial + self.tolerancia:
                 self.tolerancia = torelanciaAnterior
                 return vibracao
