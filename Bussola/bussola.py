@@ -23,6 +23,3 @@ class CommandsBussola(QMC5883L):
                 angle += 2 * math.pi
             angle = (angle / math.pi) * 180
         return angle
-
-
-

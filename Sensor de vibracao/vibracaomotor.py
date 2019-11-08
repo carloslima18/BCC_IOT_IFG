@@ -1,7 +1,6 @@
 from gpiozero import InputDevice, OutputDevice, PWMOutputDevice
 from time import os, sleep, time
 
-
 class Vibration(object):
 	def __init__(self):
 		self.motor0 = PWMOutputDevice(6)
@@ -43,8 +42,3 @@ class Vibration(object):
 	#entre 0 e 1 (1 é pq tem um buraco grande)
 	def olhando_chao(self, distancia):
 		motor2.value = round(distancia,2)
-
-		
-
-
-        

@@ -43,7 +43,6 @@ class Helps(object):
         self.tolerancia = torelanciaAnterior
         return vibracao
 
-
         # def andarLinhaReta(self):
         #     self.stopped = False
         #     commands = CommandsBussola()
