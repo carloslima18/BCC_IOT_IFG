@@ -1,3 +1,4 @@
-from Bussola.bengalaHelp import Helps
+from bengalaHelp import Helps
+
 help = Helps()
-help.andarLinhaReta()
+help.run()
