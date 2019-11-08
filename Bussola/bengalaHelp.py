@@ -13,28 +13,62 @@ class Helps(object):
         self.tolerancia = tolerancia
         self.stopped = True
 
-    def andarLinhaReta(self):
-        self.stopped = False
-        commands = CommandsBussola()
-        anguloInicial = commands.getAngle()
+    def getVariation(self, anguloInicial):
 
-        while not self.stopped:
-            angle = commands.getAngle()
-            print(angle)
+        commands = CommandsBussola()
+        angle = commands.getAngle()
+
+        torelanciaAnterior = self.tolerancia
+        vibracao = 0
+        numVariacoes = 5
+        variacaoVibracao = 1 / numVariacoes - 0.01
+        variacaoTolerancia = 10
+        for i in range(numVariacoes):
             if anguloInicial - self.tolerancia <= angle <= anguloInicial + self.tolerancia:
-                self.motor.value = 0.001
+                self.tolerancia = torelanciaAnterior
+                return vibracao
             elif anguloInicial + self.tolerancia > 360 or anguloInicial - self.tolerancia < 0:
                 if anguloInicial + self.tolerancia > 360:
                     if angle + 360 > anguloInicial + self.tolerancia:
-                        self.motor.value = 0.9
+                        vibracao += variacaoVibracao
+                        self.tolerancia += variacaoTolerancia
                 elif anguloInicial - self.tolerancia < 0:
                     if angle - 360 < anguloInicial - self.tolerancia:
-                        self.motor.value = 0.9
+                        vibracao += variacaoVibracao
+                        self.tolerancia += variacaoTolerancia
             else:
-                self.motor.value = 0.9
+                vibracao += variacaoVibracao
+                self.tolerancia += variacaoTolerancia
 
-            # print(angle)
-            time.sleep(0.1)
+        self.tolerancia = torelanciaAnterior
+        return vibracao
+
+
+        # def andarLinhaReta(self):
+        #     self.stopped = False
+        #     commands = CommandsBussola()
+        #     anguloInicial = commands.getAngle()
+        #
+        #     while not self.stopped:
+        #         angle = commands.getAngle()
+        #         print(angle)
+        #         if anguloInicial - self.tolerancia <= angle <= anguloInicial + self.tolerancia:
+        #             self.motor.value = 0.001
+        #         elif anguloInicial + self.tolerancia > 360 or anguloInicial - self.tolerancia < 0:
+        #             if anguloInicial + self.tolerancia > 360:
+        #                 if angle + 360 > anguloInicial + self.tolerancia:
+        #                     self.motor.value = 0.9
+        #             elif anguloInicial - self.tolerancia < 0:
+        #                 if angle - 360 < anguloInicial - self.tolerancia:
+        #                     self.motor.value = 0.9
+        #         else:
+        #             self.motor.value = 0.9
+        #
+        #         # print(angle)
+        #         time.sleep(0.1)
+
+        # print(angle)
+        time.sleep(0.1)
 
 
 bussola = Helps()
