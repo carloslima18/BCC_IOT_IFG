@@ -9,6 +9,8 @@ def getEstado(estado_anterior ,gpio=21):
     estado = "desligado"
     if not botao.is_active:
         return not estado_anterior
+    else:
+        return estado_anterior
     # return botao.is_active
 
     #
