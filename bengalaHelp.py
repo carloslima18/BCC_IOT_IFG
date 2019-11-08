@@ -1,6 +1,7 @@
 from Bussola.bussola import CommandsBussola
 from Ultrassom.UltraSonic import UltraSonic
 from SensorVibracao.vibracaoMotor import Vibration
+from Botoes import helpBotao
 from gpiozero import PWMOutputDevice
 import time
 import threading
@@ -49,13 +50,13 @@ class Helps(object):
             self.distancia = ultrassom.getDist()
 
     def run(self):
-        print('Started run function:')
+        # print('Started run function:')
         ultrassom = UltraSonic()
-        print('Started run UltraSonic:')
+        # print('Started run UltraSonic:')
         respostaTatil = Vibration()
-        print('Started run Vibration:')
+        # print('Started run Vibration:')
         botaoPressionado = True
-        print('Started main while')
+        # print('Started main while')
 
         try:
             t = threading.Thread(target=self.atualizarDist, args=(ultrassom,))
@@ -65,12 +66,13 @@ class Helps(object):
 
         while True:
 
-            print('distancia:' + str(self.distancia))
+            # print('distancia:' + str(self.distancia))
+            botaoPressionado = helpBotao.getEstado()
             if botaoPressionado:
                 anguloInicial = self.commands.getAngleHorizontal()
-                print('angulo inicial:' + str(anguloInicial))
+                # print('angulo inicial:' + str(anguloInicial))
                 vibrationValue = self.getVariation(anguloInicial)
-                print('vibrationValue:' + str(vibrationValue))
+                # print('vibrationValue:' + str(vibrationValue))
 
                 respostaTatil.emite_vibracao_linha_reta(vibrationValue)
             respostaTatil.olhando_frente(self.distancia)
