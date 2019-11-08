@@ -2,12 +2,15 @@ from gpiozero import LED, InputDevice
 import time
 
 
-def getEstado(gpio=21):
+def getEstado(estado_anterior ,gpio=21):
     botao = InputDevice(21)
     # led = LED(26)
 
     estado = "desligado"
-    return botao.is_active
+    if not botao.is_active:
+        return not estado_anterior
+    # return botao.is_active
+
     #
     # # while True:
     # if not botao.is_active:

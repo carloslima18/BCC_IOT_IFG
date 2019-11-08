@@ -67,7 +67,7 @@ class Helps(object):
         while True:
 
             # print('distancia:' + str(self.distancia))
-            botaoPressionado = helpBotao.getEstado()
+            botaoPressionado = helpBotao.getEstado(botaoPressionado)
             print('botaoPressionado' + str(botaoPressionado))
             if botaoPressionado:
                 anguloInicial = self.commands.getAngleHorizontal()
