@@ -43,10 +43,13 @@ class Helps(object):
         return vibracao
 
     def run(self):
+        print('Started run function:')
         ultrassom = UltraSonic()
+        print('Started run UltraSonic:')
         respostaTatil = Vibration()
+        print('Started run Vibration:')
         botaoPressionado = True
-
+        print('Started main while')
         while True:
             distancia = ultrassom.getDist()
             print('distancia:' + str(distancia))
