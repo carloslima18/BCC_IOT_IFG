@@ -32,7 +32,7 @@ class Vibration(object):
 		elif(distancia_corrente >= distancia_longa):
 			motor0.value = vibracao_media
 		# se não tiver nada em frente.
-		elif
+		else:
 			motor0.value = 0
 	
 	#entre 0 e 1,, onde 0 esta em linha, reta... e de acordo que se aproxima de 1! esta se desviando da linha reta.
