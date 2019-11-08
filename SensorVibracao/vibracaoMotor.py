@@ -1,5 +1,5 @@
 from gpiozero import InputDevice, OutputDevice, PWMOutputDevice
-from time import os, sleep, time
+from time import sleep, time
 
 class Vibration(object):
 	def __init__(self):
