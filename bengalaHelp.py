@@ -3,6 +3,7 @@ from Ultrassom.UltraSonic import UltraSonic
 from SensorVibracao.vibracaoMotor import Vibration
 from gpiozero import PWMOutputDevice
 import time
+import threading
 
 
 class Helps(object):
@@ -12,6 +13,7 @@ class Helps(object):
         self.tolerancia = tolerancia
         self.stopped = True
         self.commands = CommandsBussola()
+        self.distancia = 99999
 
     def getVariation(self, anguloInicial):
 
@@ -42,6 +44,10 @@ class Helps(object):
         self.tolerancia = torelanciaAnterior
         return vibracao
 
+    def atualizarDist(self, ultrassom):
+        while True:
+            self.distancia = ultrassom.getDist()
+
     def run(self):
         print('Started run function:')
         ultrassom = UltraSonic()
@@ -50,15 +56,23 @@ class Helps(object):
         print('Started run Vibration:')
         botaoPressionado = True
         print('Started main while')
+
+        try:
+            t = threading.Thread(target=self.atualizarDist, args=(ultrassom,))
+            t.start()
+        except:
+            print("Error: unable to start thread")
+
         while True:
-            distancia = ultrassom.getDist()
-            print('distancia:' + str(distancia))
+
+            print('distancia:' + str(self.distancia))
             if botaoPressionado:
                 anguloInicial = self.commands.getAngleHorizontal()
                 print('angulo inicial:' + str(anguloInicial))
                 vibrationValue = self.getVariation(anguloInicial)
                 print('vibrationValue:' + str(vibrationValue))
+
                 respostaTatil.emite_vibracao_linha_reta(vibrationValue)
-            respostaTatil.olhando_frente(distancia)
+            respostaTatil.olhando_frente(self.distancia)
             # anguloVertical = self.commands.getAngleVertical()
             time.sleep(0.1)
