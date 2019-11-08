@@ -49,9 +49,12 @@ class Helps(object):
 
         while True:
             distancia = ultrassom.getDist()
+            print('distancia:' + str(distancia))
             if botaoPressionado:
                 anguloInicial = self.commands.getAngleHorizontal()
+                print('angulo inicial:' + str(anguloInicial))
                 vibrationValue = self.getVariation(anguloInicial)
+                print('vibrationValue:' + str(vibrationValue))
                 respostaTatil.emite_vibracao_linha_reta(vibrationValue)
             respostaTatil.olhando_frente(distancia)
             # anguloVertical = self.commands.getAngleVertical()
