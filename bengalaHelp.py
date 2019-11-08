@@ -56,6 +56,7 @@ class Helps(object):
         respostaTatil = Vibration()
         # print('Started run Vibration:')
         botaoPressionado = True
+        botaoPressionadoAnterior = False
         # print('Started main while')
 
         try:
@@ -70,7 +71,9 @@ class Helps(object):
             botaoPressionado = helpBotao.getEstado(botaoPressionado)
             print('botaoPressionado' + str(botaoPressionado))
             if botaoPressionado:
-                anguloInicial = self.commands.getAngleHorizontal()
+                if not botaoPressionadoAnterior:
+                    anguloInicial = self.commands.getAngleHorizontal()
+                    botaoPressionadoAnterior = True
                 # print('angulo inicial:' + str(anguloInicial))
                 vibrationValue = self.getVariation(anguloInicial)
                 # print('vibrationValue:' + str(vibrationValue))
@@ -78,6 +81,7 @@ class Helps(object):
                 respostaTatil.emite_vibracao_linha_reta(vibrationValue)
             else:
                 respostaTatil.emite_vibracao_linha_reta(0.001)
+                botaoPressionadoAnterior = False
             print('distancia:' + str(self.distancia))
             respostaTatil.olhando_frente(self.distancia)
             # anguloVertical = self.commands.getAngleVertical()
