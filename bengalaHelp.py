@@ -75,6 +75,8 @@ class Helps(object):
                 # print('vibrationValue:' + str(vibrationValue))
 
                 respostaTatil.emite_vibracao_linha_reta(vibrationValue)
+            else:
+                respostaTatil.emite_vibracao_linha_reta(0.001)
             respostaTatil.olhando_frente(self.distancia)
             # anguloVertical = self.commands.getAngleVertical()
             time.sleep(0.1)
