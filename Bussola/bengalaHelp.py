@@ -1,7 +1,9 @@
-from bussola import CommandsBussola
+from Bussola.bussola import CommandsBussola
 from threading import Thread
 from gpiozero import PWMOutputDevice
 import time
+
+from Ultrassom.UltraSonic import UltraSonic
 
 
 class Helps(object):
@@ -33,3 +35,16 @@ class Helps(object):
 
             # print(angle)
             time.sleep(0.1)
+
+
+bussola = Helps()
+ultrassom = UltraSonic()
+
+while True:
+    distancia = ultrassom.getDist()
+    # TODO: vibra(distancia)
+
+    # TODO: se o botão for pressionado:
+    Helps.andarLinhaReta(bussola)
+    # TODO: se o botão for pressionado de novo:
+    #   Helps.stopped = True

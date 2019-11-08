@@ -1,8 +1,8 @@
-import py_qmc5883l
+from Bussola import py_qmc5883l
 import time
 import math
 from gpiozero import InputDevice, OutputDevice, PWMOutputDevice
-from py_qmc5883l import QMC5883L
+from Bussola.py_qmc5883l import QMC5883L
 
 
 class CommandsBussola(QMC5883L):

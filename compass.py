@@ -5,9 +5,7 @@
 import smbus        #import SMBus module of I2C
 from time import sleep  #import sleep
 import math
-import py_qmc5883l
-
-
+from Bussola import py_qmc5883l
 
 #some MPU6050 Registers and their Address
 Register_A     = 0x0              #Address of Configuration register A
